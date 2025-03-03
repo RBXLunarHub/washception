@@ -10,10 +10,11 @@
 <body class="home-container">
   
   <!-- User Info Display -->
-  <div id="user-info" class="user-info">
-    <img id="avatar" src="" alt="User Avatar" class="user-avatar" style="display:none;">
-    <span id="username" class="username"></span>
-  </div>
+<div id="user-info" class="user-info">
+  <img id="avatar" src="" alt="User Avatar" class="user-avatar" style="display:none;">
+  <span id="username" class="username"></span>
+</div>
+
 
   <div class="container">
     <h1 class="glow-text">Lunaree V1</h1>
@@ -28,14 +29,19 @@
 
   <script>
     // Load user info from localStorage
-    const storedUser = localStorage.getItem("discordUser");
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      document.getElementById("username").textContent = `${user.username}#${user.discriminator}`;
-      const avatar = document.getElementById("avatar");
-      avatar.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
-      avatar.style.display = "inline";
-    }
+const storedUser = localStorage.getItem("discordUser");
+if (storedUser) {
+  const user = JSON.parse(storedUser);
+  document.getElementById("username").textContent = `${user.username}#${user.discriminator}`;
+  const avatar = document.getElementById("avatar");
+  avatar.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+  avatar.style.display = "inline";
+} else {
+  // Handle the case where user is not connected (optional)
+  console.log("User not connected");
+}
+
+
   </script>
 
 </body>
