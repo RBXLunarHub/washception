@@ -1,18 +1,42 @@
-const clientId = "1346125999896793118";
-const redirectUri = "https://rbxlunarhub.github.io/washception/LunareeWebsite";
-const scope = "identify";
-const responseType = "code";
-
-const authUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&response_type=${responseType}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`;
+const clientId = "1346125999896793118"; // Your Discord Client ID
+const redirectUri = "https://rbxlunarhub.github.io/washception/LunareeWebsite"; // Your redirect URI
+const clientSecret = "YOUR_CLIENT_SECRET"; // Don't expose this in client-side JS; use a backend in production
+const authUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(
+  redirectUri
+)}&scope=identify`;
 
 document.getElementById("connectDiscord").addEventListener("click", () => {
   window.location.href = authUrl;
 });
 
-// Function to get URL parameters (to extract token)
-function getAccessToken() {
-  const params = new URLSearchParams(window.location.hash.substring(1));
-  return params.get("access_token");
+// Function to get the authorization code from URL
+function getAuthCode() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("code");
+}
+
+// Exchange code for access token
+async function getAccessToken(code) {
+  const response = await fetch("https://discord.com/api/oauth2/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      grant_type: "authorization_code",
+      code: code,
+      redirect_uri: redirectUri,
+    }),
+  });
+
+  if (!response.ok) {
+    console.error("Failed to get access token");
+    return null;
+  }
+
+  return response.json();
 }
 
 // Fetch user data from Discord API
@@ -41,8 +65,13 @@ function displayUserData(user) {
   ).src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
 }
 
-// Auto-run if returning from Discord OAuth
-const token = getAccessToken();
-if (token) {
-  fetchDiscordUser(token);
-}
+// Handle OAuth2 flow
+window.onload = async () => {
+  const code = getAuthCode();
+  if (code) {
+    const tokenData = await getAccessToken(code);
+    if (tokenData && tokenData.access_token) {
+      fetchDiscordUser(tokenData.access_token);
+    }
+  }
+};
