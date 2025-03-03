@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="css/layout.css">
 </head>
 <body class="home-container">
+  
+  <!-- User Info Display -->
+  <div id="user-info" class="user-info">
+    <img id="avatar" src="" alt="User Avatar" class="user-avatar" style="display:none;">
+    <span id="username" class="username"></span>
+  </div>
+
   <div class="container">
     <h1 class="glow-text">Lunaree V1</h1>
     <p class="description-text">Welcome to Lunaree V1, the future of modern UI experiences.</p>
@@ -18,5 +25,18 @@
       <button class="glow-button" onclick="location.href='discord.html'">Get Discord</button>
     </div>
   </div>
+
+  <script>
+    // Load user info from localStorage
+    const storedUser = localStorage.getItem("discordUser");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      document.getElementById("username").textContent = `${user.username}#${user.discriminator}`;
+      const avatar = document.getElementById("avatar");
+      avatar.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+      avatar.style.display = "inline";
+    }
+  </script>
+
 </body>
 </html>
