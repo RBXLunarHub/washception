@@ -1,4 +1,4 @@
-const clientId = "YOUR_DISCORD_CLIENT_ID";
+const clientId = "134612599989679311";
 const redirectUri = "http://localhost/discord.html"; // Change to your website's URL
 const scope = "identify";
 const authUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
