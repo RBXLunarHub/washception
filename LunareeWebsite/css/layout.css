@@ -1,0 +1,83 @@
+/* --- Home Page --- */
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* --- Download Page: Two-Column Layout --- */
+.download-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.download-description {
+    flex: 1 1 45%;
+    text-align: left;
+}
+.download-image {
+    flex: 1 1 45%;
+    text-align: center;
+}
+.download-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(212, 170, 255, 0.5);
+}
+
+/* --- Script Page: Timeline Layout --- */
+.timeline {
+    position: relative;
+    margin: 40px 0;
+    padding-left: 30px;
+    border-left: 2px solid #bb00ff;
+}
+.timeline-item {
+    margin-bottom: 30px;
+    position: relative;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    background: #6e00ff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(108, 0, 255, 0.8);
+}
+
+/* --- Learn More Page: Sectioned Layout --- */
+.learnmore-section {
+    margin: 40px 0;
+    padding: 20px;
+    border-bottom: 1px solid #444;
+}
+.learnmore-section:nth-child(even) {
+    background-color: #111;
+}
+.learnmore-section h2 {
+    margin-bottom: 10px;
+}
+
+/* --- Discord Page: Centered Card Layout --- */
+.discord-card {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 40px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(212, 170, 255, 0.3);
+    text-align: center;
+}
+.discord-card h1 {
+    margin-bottom: 20px;
+}
+.discord-card p {
+    margin-bottom: 30px;
+}
