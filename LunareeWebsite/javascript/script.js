@@ -1,9 +1,9 @@
-const clientId = "134612599989679311";
-const redirectUri = "http://localhost/discord.html"; // Change to your website's URL
+const clientId = "1346125999896793118";
+const redirectUri = "https://rbxlunarhub.github.io/washception/LunareeWebsite";
 const scope = "identify";
-const authUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
-  redirectUri
-)}&response_type=token&scope=${scope}`;
+const responseType = "code";
+
+const authUrl = `https://discord.com/oauth2/authorize?client_id=${clientId}&response_type=${responseType}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}`;
 
 document.getElementById("connectDiscord").addEventListener("click", () => {
   window.location.href = authUrl;
